@@ -4,7 +4,7 @@ import SwiftUI
 struct iOSApp: App {
     var body: some Scene {
         WindowGroup {
-            AboutScreen()
+            ArticlesScreen(viewModel: .init())
         }
     }
 }

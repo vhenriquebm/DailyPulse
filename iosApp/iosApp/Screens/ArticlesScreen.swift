@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-import shared
+import Shared
 
 extension ArticlesScreen {
     
     @MainActor
     class ArticlesViewModelWrapper: ObservableObject {
         let articlesViewModel: ArticlesViewModel
+        @Published var articlesState: ArticlesState
         
         
         init() {
@@ -20,7 +21,6 @@ extension ArticlesScreen {
             articlesState = articlesViewModel.articlesState.value
         }
         
-        @Published var articlesState: ArticlesState
         
         func startObserving() {
             Task {
