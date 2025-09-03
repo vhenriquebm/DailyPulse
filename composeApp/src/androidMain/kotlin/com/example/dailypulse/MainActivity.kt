@@ -19,16 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            ArticlesScreen(
-                onAboutButtonClick = { /* TODO: navigation */ },
-                articlesViewModel = articlesViewModel
-            )
+            AppScaffold(articlesViewModel)
         }
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    AboutScreen()
 }
