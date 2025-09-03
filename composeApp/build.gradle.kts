@@ -68,5 +68,6 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+    implementation("io.coil-kt:coil-compose:2.7.0")
 }
 
