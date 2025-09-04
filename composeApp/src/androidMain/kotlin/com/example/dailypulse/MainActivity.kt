@@ -12,14 +12,13 @@ import com.example.dailypulse.screens.AboutScreen
 import com.example.dailypulse.screens.ArticlesScreen
 
 class MainActivity : ComponentActivity() {
-    private val articlesViewModel: ArticlesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         setContent {
-            AppScaffold(articlesViewModel)
+            AppScaffold()
         }
     }
 }

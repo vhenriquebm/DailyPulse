@@ -34,6 +34,7 @@ kotlin {
                 implementation("io.ktor:ktor-serialization-kotlinx-json:3.2.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.koin.core)
             }
         }
 
