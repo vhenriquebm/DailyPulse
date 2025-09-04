@@ -4,22 +4,17 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    id("co.touchlab.skie") version "0.10.6"
+    id("co.touchlab.skie") version "0.4.19"
+    kotlin("plugin.serialization") version "1.9.20"
 }
 
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
+        compilerOptions { jvmTarget.set(JvmTarget.JVM_11) }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
+    listOf(iosX64(), iosArm64(), iosSimulatorArm64()).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
@@ -27,33 +22,23 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
-
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+                implementation(libs.ktor.client.core)
+            }
         }
 
         val androidMain by getting {
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.3")
-                implementation(libs.ktor.client.android)
+                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.1") // manter consistente
+                implementation(libs.ktor.client.okhttp)
             }
         }
 
-        val iosMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.darwin)
-            }
+        val commonTest by getting {
+            dependencies { implementation(libs.kotlin.test) }
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
-    }
-    sourceSets.commonMain.dependencies {
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     }
 }
 
